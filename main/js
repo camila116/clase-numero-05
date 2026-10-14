@@ -1,0 +1,41 @@
+class Producto {
+    constructor(nombre, precio, categoria, stock) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.stock = stock;
+    }
+
+    vender(cantidad) {
+        if (cantidad <= this.stock) {
+            this.stock -= cantidad;
+            return true;
+        }
+
+        return false;
+    }
+}
+
+const manzana = new Producto("Manzana", 100, "Fruta", 20);
+const pan = new Producto("Pan", 500, "Panaderia", 10);
+const leche = new Producto("Leche", 800, "Lacteo", 8);
+
+const productos = [manzana, pan, leche];
+
+const ventaRealizada = leche.vender(1);
+console.log("¿Se realizó la venta?", ventaRealizada);
+console.log("Leche después de la venta:", leche);
+
+function mostrarProductos() {
+    const lista = document.querySelector("#inventory-report");
+
+    for (const producto of productos) {
+        const elemento = document.createElement("li");
+        elemento.textContent =
+            `${producto.nombre} | Precio: $${producto.precio} | Categoria: ${producto.categoria} | Stock: ${producto.stock}`;
+        lista.append(elemento);
+    }
+}
+
+mostrarProductos();
+console.log("Lista final:", productos);
